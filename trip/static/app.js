@@ -1,3 +1,7 @@
 document.addEventListener("DOMContentLoaded", function(){
-  alert("hello")
-})
+  const editBtn =document.querySelector("#editBtn");
+  console.log(editBtn.innerHTML);
+  if(editBtn.innerHTML === "Completed Trip"){
+    editBtn.disabled = true;
+  }
+});

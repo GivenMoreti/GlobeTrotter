@@ -82,7 +82,7 @@
               <td>{{trip.trip_date}}</td>
               <td>
                 {% if trip.status == "Completed" %}
-                <a disabled href="{% url 'edit_trip' trip.id %}" class="btn btn-warning">{{trip.status}} Trip
+                <a id="editBtn" href="{% url 'edit_trip' trip.id %}" class="btn btn-warning">{{trip.status}} Trip
                 </a>
                 {% else%}
                 <a href="{% url 'edit_trip' trip.id %}" class="btn btn-warning">{{trip.status}} Trip
