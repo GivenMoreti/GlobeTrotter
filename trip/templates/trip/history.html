@@ -1,0 +1,13 @@
+{% extends 'trip/base.html' %}
+{% block content %}
+<div class="container">
+  <h1>Deleted trips</h1>
+  <ul>
+    {% for item in deleted_items %}
+      <li>{{ item.driver }} - {{ item.deleted_at }}</li>
+    {% empty %}
+      <li>No deleted items found.</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

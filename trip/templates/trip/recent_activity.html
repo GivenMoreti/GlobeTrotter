@@ -1,0 +1,12 @@
+{% extends "trip/base.html" %}
+{% block content %}
+  <div class="activity">
+    <ul>
+      {% for ra in recent_activity %}
+      <li>{{ra}}</li>
+      {%empty%}
+      <li>No activity found.</li>
+    </ul>
+      {% endfor %}
+  </div>
+{% endblock%}

@@ -1,0 +1,32 @@
+{% extends "trip/base.html" %}
+{% block content %}
+  <div class="container">
+    <form id="my-form" method="post">
+      {% csrf_token %}
+      {{ add_trip_form.as_p  }}
+      <input type="submit" id="my-submit-button" value="Add trip" />
+    </form>
+
+  </div>
+  <!-- <script>
+    document.getElementById("my-form").addEventListener("submit", function(event) {
+        event.preventDefault();  // prevent the default form submission behavior
+        var form = document.getElementById("my-form");
+        var button = document.getElementById("my-submit-button");
+        button.disabled = true;  // disable the submit button to prevent multiple submissions
+        var formData = new FormData(form);
+        var xhr = new XMLHttpRequest();
+        xhr.open(form.method, form.action);
+        xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                // handle a successful form submission
+            } else {
+                // handle an unsuccessful form submission
+            }
+            button.disabled = false;  // re-enable the submit button
+        };
+        xhr.send(formData);
+    });
+</script> -->
+{% endblock%}

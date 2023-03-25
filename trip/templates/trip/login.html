@@ -1,0 +1,17 @@
+{% extends "trip/base.html" %}
+{% block content %}
+  <div>
+    <form method="post">
+      {% csrf_token %}
+      <div class="form-input">
+      <input type="text" autofocus name ="username" placeholder="username" required/>
+      <br>
+      <input type="password" name ="password" placeholder="password" required/>
+      <br>
+      <input type="submit" id="sign-in" value="Sign in" />
+      
+    </div>
+    </form>
+
+  </div>
+{% endblock%}

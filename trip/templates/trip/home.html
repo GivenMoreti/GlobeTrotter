@@ -1,0 +1,111 @@
+{% extends "trip/base.html" %} {% block content %}
+<style>
+  body {
+    margin-left: 2px;
+  }
+
+  .container-main {
+
+    display: grid;
+    grid-template-columns: 0.5fr 3.5fr;
+
+  }
+
+  .trips-homepage,
+  h3 {
+    text-align: center;
+
+  }
+</style>
+<div class="container-main">
+  <div class="users-cars">
+    <div class="users">
+      <h3>All users</h3>
+
+      <div class="user">
+        {% if users_count %}
+        <p style="color:blue;">{{users_count}} active users.</p>
+        {% else %}
+        <p>No users</p>
+
+        {% endif %}
+      </div>
+    </div>
+    <!-- cars starts here -->
+    <div class="cars">
+      <h3>All cars</h3>
+      {% if cars_count%}
+      <p style="color:blue;">{{cars_count}} Car(s) available.</p>
+      {%else%}
+      <p>No cars</p>
+      {% endif %}
+    </div>
+  </div>
+  <!-- trips starts here -->
+  {% if trips %}
+
+  <div class="trips-homepage">
+    <h3>Book a trip now</h3>
+    <p>{% if count_completed_trips %}</p>
+    <p style="color:blue;">Number of completed trips :{{ count_completed_trips}}</p>
+    {%else%}
+    <p>No trips are completed.</p>
+    {% endif %}
+    <ol>
+      <div class="trip">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Added</th>
+              <th scope="col">From</th>
+              <th scope="col">Destination</th>
+              <th scope="col">Distance</th>
+              <th scope="col">Car</th>
+              <th scope="col">Driver</th>
+              <th scope="col">Date</th>
+              <th scope="col">Edit</th>
+
+              <th scope="col">Add</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for trip in trips %}
+            <tr>
+              <td style="color: blue; font-weight: bold">
+                {{trip.date_added |timesince}} ago
+              </td>
+              <td>{{trip.start_location}}</td>
+              <td>{{trip.end_location}}</td>
+              <td>{{trip.distance}}</td>
+              <td>{{trip.car}}</td>
+              <td>{{trip.driver }}</td>
+              <td>{{trip.trip_date}}</td>
+              <td>
+                {% if trip.status == "Completed" %}
+                <a disabled href="{% url 'edit_trip' trip.id %}" class="btn btn-warning">{{trip.status}} Trip
+                </a>
+                {% else%}
+                <a href="{% url 'edit_trip' trip.id %}" class="btn btn-warning">{{trip.status}} Trip
+                </a>
+                {% endif %}
+
+              </td>
+
+              <td>
+                <a href="{% url 'add_trip' %}" class="btn btn-primary">Add Trip</a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </ol>
+  </div>
+
+  {%else%}
+  <div>
+    <a href="{% url 'add_car' %}" class="btn btn-success">Add car</a>
+  </div>
+  {% endif %}
+</div>
+{% endblock%}

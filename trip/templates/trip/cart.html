@@ -1,0 +1,18 @@
+{% extends "trip/base.html" %}
+{% block content %}
+
+<div class="container">
+  <h1> Items in cart </h1>
+{% for item in cart_items %}
+<div class="cart-items">
+  <ol>
+    <div>
+      <h1>{{item.owner}}</h1>
+      <li>{{item.trips}}</li>
+    </div>
+  </ol>
+  
+</div>
+  {% endfor %}
+</div>
+{% endblock%}

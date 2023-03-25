@@ -1,0 +1,19 @@
+<div class="header">
+  {% if user.is_authenticated %}
+
+  <a href="{% url 'trips'%}">Home</a>
+  <a href="{% url 'request-trip' %}">Request</a>
+  <a href="{% url 'cart' %}">Cart</a>
+  <a href="{% url 'cars' %}">Cars</a>
+  <a href="/admin">Admin</a>
+  <a href="{% url 'logout' %}">Logout</a>
+   <a href="{% url 'history' %}">History</a> 
+  {%else%}
+  <a href="{% url 'trips'%}">Home</a>
+  <a href="{% url 'all-users' %}">Users</a>
+  <a href="{% url 'login' %}">Login</a>
+  <a href="{% url 'register' %}">Sign up</a>
+
+  {% endif %}
+
+</div>

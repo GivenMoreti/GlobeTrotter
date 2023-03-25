@@ -1,0 +1,52 @@
+{% extends "trip/base.html" %}
+{% block content %}
+<!-- <script>
+ const form = document.getElementById('trip-request-form');
+  const startLocationInput = form.querySelector('input[name="start_location"]');
+  const endLocationInput = form.querySelector('input[name="end_location"]');
+  const distanceInput = form.querySelector('input[name="distance"]');
+  const submitButton = form.querySelector('#submit-button');
+
+  function validateForm(event) {
+    // Prevent the default form submission behavior
+    event.preventDefault();
+
+    // Validate the start location input
+    if (startLocationInput.value.trim() === '') {
+      alert('Please enter a start location.');
+      startLocationInput.focus();
+      return false;
+    }
+
+    // Validate the end location input
+    if (endLocationInput.value.trim() === '') {
+      alert('Please enter an end location.');
+      endLocationInput.focus();
+      return false;
+    }
+
+    // Validate the distance input
+    if (distanceInput.value.trim() === '' || isNaN(distanceInput.value)) {
+      alert('Please enter a valid distance.');
+      distanceInput.focus();
+      return false;
+    }
+
+    // If all validations pass, submit the form
+    form.submit();
+  }
+
+  // Add an event listener to the submit button to trigger form validation
+  submitButton.addEventListener('click', validateForm);
+ 
+
+</script> -->
+<div class="container">
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" class="btn btn-primary" value="Request">
+  </form>
+  
+</div>
+{% endblock%}

@@ -1,0 +1,32 @@
+{% extends "trip/base.html" %}
+{% block content %}
+  <div class="container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Added</th>
+          <th scope="col">Model</th>
+          <th scope="col">Year</th>
+          <th scope="col">Make</th>
+          <th scope="col">Owner</th>
+          <th scope="col">Add </th>
+        
+        </tr>
+      </thead>
+      <tbody>
+        {% for car in cars %}
+        <tr>
+          <td style="color: blue; font-weight: bold">
+            {{car.date_added |timesince}} ago
+          </td>
+          <td>{{car.model}}</td>
+          <td>{{car.year}}</td>
+          <td>{{car.make}}</td>
+          <td>{{car.driver}}</td>
+          <td><a href="{% url 'add_car'%}" class="btn btn-success">Add </a></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock%}
