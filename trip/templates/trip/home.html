@@ -85,14 +85,14 @@
                 <a id="editBtn" href="{% url 'edit_trip' trip.id %}" class="btn btn-warning">{{trip.status}} Trip
                 </a>
                 {% else%}
-                <a href="{% url 'edit_trip' trip.id %}" class="btn btn-warning">{{trip.status}} Trip
+                <a id="editBtn" href="{% url 'edit_trip' trip.id %}" class="btn btn-warning">{{trip.status}} Trip
                 </a>
                 {% endif %}
 
               </td>
 
               <td>
-                <a href="{% url 'add_trip' %}" class="btn btn-primary">Add Trip</a>
+                <a id="add_trip" href="{% url 'add_trip' %}" class="btn btn-primary">Add Trip</a>
               </td>
             </tr>
             {% endfor %}
