@@ -5,9 +5,15 @@ from .forms import TripRequestForm,TripForm,CarForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login ,logout
 from datetime import datetime
-
 from django.contrib.admin.models import LogEntry, ADDITION
 from django.contrib.contenttypes.models import ContentType
+
+
+# independent home view with html
+def greet(request):
+
+    return render(request,'trip/greet.html')
+
 
 @login_required
 def request_trip(request):
@@ -118,7 +124,7 @@ def get_trips(request):
 
 
     context = {
-        "count_active_trips ":count_active_trips, 
+        "count_active_trips":count_active_trips, 
             "count_requested_trips":count_requested_trips,
                "trips":trips,
                "count_completed_trips":count_completed_trips,

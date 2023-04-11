@@ -3,7 +3,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('',views.get_trips,name="trips"),
+    path('',views.greet,name='greet'),
+    path('trips/',views.get_trips,name="trips"),
     path('cars/',views.get_cars,name="cars"),
     path('users/',views.get_users,name="all-users"),
     path('request_trip/',views.request_trip,name="request-trip"),
@@ -17,6 +18,4 @@ urlpatterns = [
     path('delete/<int:id>/', views.deleted_trip, name='deleted_trip'),
     path('history/',views.history, name='history'),
     # path('activity/',views.recent_activity, name='recent_activity')
-    
-
 ]

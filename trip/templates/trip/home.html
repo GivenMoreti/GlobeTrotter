@@ -2,6 +2,7 @@
 <style>
   body {
     margin-left: 2px;
+   
   }
 
   .container-main {
@@ -16,15 +17,23 @@
     text-align: center;
 
   }
+  .summary{
+    background-color:rgb(249, 247, 247) ;
+    border-radius:0 2px 2px 0;
+    border: none;
+    box-shadow: 5px 5px 5px 5px rgba(123, 211, 161, 0.5);
+    padding-left: 2px;
+  }
 </style>
 <div class="container-main">
-  <div class="users-cars">
+  <div class="summary">
     <div class="users">
-      <h3>All users</h3>
+      <h2>summary</h2>
+      
 
       <div class="user">
         {% if users_count %}
-        <p style="color:blue;">{{users_count}} active users.</p>
+        <p style="color:blue;">#{{users_count}} active users.</p>
         {% else %}
         <p>No users</p>
 
@@ -33,24 +42,42 @@
     </div>
     <!-- cars starts here -->
     <div class="cars">
-      <h3>All cars</h3>
+      
       {% if cars_count%}
-      <p style="color:blue;">{{cars_count}} Car(s) available.</p>
+      <p style="color:blue;">#{{cars_count}} Car(s) available.</p>
       {%else%}
       <p>No cars</p>
       {% endif %}
     </div>
+    <div class="active-trips">
+      <!-- active trips -->
+      <p>{% if count_active_trips %}</p>
+      <p style="color:orangered;">#Active trips :{{ count_active_trips}}</p>
+      {%else%}
+      <p>No active trips.</p>
+      {% endif %}
+
+      <!-- active trips display end here -->
+    </div>
+    <p>{% if count_completed_trips %}</p>
+    <p style="color:rgb(236, 155, 4);">#completed trips :{{ count_completed_trips}}</p>
+    {%else%}
+    <p>No trips are completed.</p>
+    {% endif %}
+
   </div>
   <!-- trips starts here -->
   {% if trips %}
 
   <div class="trips-homepage">
-    <h3>Book a trip now</h3>
     <p>{% if count_completed_trips %}</p>
-    <p style="color:blue;">Number of completed trips :{{ count_completed_trips}}</p>
+    <h3>Book a trip now</h3>
     {%else%}
     <p>No trips are completed.</p>
     {% endif %}
+
+
+
     <ol>
       <div class="trip">
         <table class="table">

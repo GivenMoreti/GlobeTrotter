@@ -64,3 +64,11 @@ class DeletedTrip(models.Model):
     deleted_trip = models.ForeignKey(Trip,on_delete=models.PROTECT)
     deleted_at = models.DateTimeField(auto_now_add=True)
 
+# user profile to  modify default user
+class UserProfile(models.Model):
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    is_driver = models.BooleanField(default=False)
+    user_image = models.CharField(max_length=8550)
+    def __str__(self):
+        return self.user.username
+    
