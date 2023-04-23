@@ -1,0 +1,90 @@
+body{  
+    background-color: yellow;
+    /* background-color: rgb(12, 245, 4); */
+    margin: 0;
+    padding: 2px;
+    font-family: monospace,'Courier New', Courier ;
+}
+
+.heading,.we-drive-h1{
+    text-align: center;
+    font-size:3rem;
+}
+.register{
+    text-align: center;
+    width: 30%;
+    background-color: rgb(239, 243, 239);
+    background-color: rgb(239, 253, 239);
+    background-color: transparent;
+    align-items: center;
+    margin: 0 auto;
+    border-radius: 10px;
+    
+}
+.form-info{
+    margin:30px ;
+    padding: 10px;
+}
+
+.header ul {
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+    text-decoration: none;
+}
+
+img {
+    object-fit: contain;
+    mix-blend-mode: normal;
+    width: 50px;
+}
+
+.we-drive {
+    text-align: center;
+    margin-top: 10%;
+    padding-top: 2px;
+}
+
+.our-offers {
+    background-color: black;
+    color: yellow;
+    /* color: rgb(12, 245, 4);; */
+    height: 50px;
+    width: 25%;
+    font-size: 1.3rem;
+    font-weight: 900;
+    border-radius: 2px;
+    border: 1px solid black;
+}
+
+.our-offers:hover {
+    background-color: yellow;
+    color: black;
+}
+
+.book-now:hover {
+    background-color: yellow;
+    color: black;
+}
+.book-now {
+    background-color: black;
+    color: yellow;
+    height: 30px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    border-radius: 2px;
+    border: 1px solid black;
+}
+.footer {
+    padding-top: 5%;
+    text-align: center;
+    opacity: 0.4;
+}
+
+@media (min-width: 450px) {
+    .we-drive-h1 .footer .book-now .learn-more .header li {
+        display: flex;
+        width: 50%;
+        font-size: 1.3rem;
+    }
+}
