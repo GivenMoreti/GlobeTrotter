@@ -62,7 +62,7 @@
     <p>{% if count_completed_trips %}</p>
     <p style="color:rgb(236, 155, 4);">#completed trips :{{ count_completed_trips}}</p>
     {%else%}
-    <p>No trips are completed.</p>
+    <p>No completed trips.</p>
     {% endif %}
 
   </div>
@@ -73,7 +73,7 @@
     <p>{% if count_completed_trips %}</p>
     <h3>Book a trip now</h3>
     {%else%}
-    <p>No trips are completed.</p>
+    <p>No completed trips.</p>
     {% endif %}
 
 
@@ -93,6 +93,7 @@
               <th scope="col">Edit</th>
 
               <th scope="col">Add</th>
+              <th scope="col">Remove</th>
             </tr>
           </thead>
           <tbody>
@@ -109,17 +110,20 @@
               <td>{{trip.trip_date}}</td>
               <td>
                 {% if trip.status == "Completed" %}
-                <a id="editBtn" href="{% url 'edit_trip' trip.id %}" class="btn btn-warning">{{trip.status}} Trip
+                <a id="editBtn" href="{% url 'edit_trip' trip.id %}" class="btn btn-warning">{{trip.status}}
                 </a>
                 {% else%}
-                <a id="editBtn" href="{% url 'edit_trip' trip.id %}" class="btn btn-warning">{{trip.status}} Trip
+                <a id="editBtn" href="{% url 'edit_trip' trip.id %}" class="btn btn-warning">{{trip.status}}
                 </a>
                 {% endif %}
 
               </td>
-
+              
               <td>
-                <a id="add_trip" href="{% url 'add_trip' %}" class="btn btn-primary">Add Trip</a>
+                <a id="add_trip" href="{% url 'add_trip' %}" class="btn btn-primary">+</a>
+              </td>
+              <td>
+                <a id="add_trip" href="{% url 'delete_trip' trip.id %}" class="btn btn-danger">x</a>
               </td>
             </tr>
             {% endfor %}
@@ -131,7 +135,7 @@
 
   {%else%}
   <div>
-    <a href="{% url 'add_car' %}" class="btn btn-success">Add car</a>
+    <a href="{% url 'add_trip' %}" class="btn btn-success">Add trip</a>
   </div>
   {% endif %}
 </div>

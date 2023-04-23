@@ -29,19 +29,19 @@ def greet(request):
     return render(request,'trip/greet.html')
 
 
-@login_required
-def request_trip(request):
-    if request.method == 'POST':
-        form = TripRequestForm(request.POST)
-        if form.is_valid():
-            trip = form.save(commit=False)
-            trip.save()
-            cart, created = Cart.objects.get_or_create(owner=request.user)
-            cart.trips.add(trip)
-            return redirect('cart')
-    else:
-        form= TripRequestForm()
-    return render(request, 'trip/request_trip.html',{"form":form})
+# @login_required
+# def request_trip(request):
+#     if request.method == 'POST':
+#         form = TripRequestForm(request.POST)
+#         if form.is_valid():
+#             trip = form.save(commit=False)
+#             trip.save()
+#             cart, created = Cart.objects.get_or_create(owner=request.user)
+#             cart.trips.add(trip)
+#             return redirect('cart')
+#     else:
+#         form= TripRequestForm()
+#     return render(request, 'trip/request_trip.html',{"form":form})
 
 # add a trip once logged in
 @login_required
@@ -69,6 +69,7 @@ def add_trip(request):
     return render(request, 'trip/add_trip.html', {'add_trip_form': add_trip_form})
 
 # allow logged in users to edit trips
+@login_required
 def edit_trip(request, id):
     trip = Trip.objects.get(id=id)
     form = TripForm(instance = trip) 
@@ -209,6 +210,20 @@ def deleted_trip(request, id):
     deleted_trip.delete()
     return redirect('trips')
 
+@login_required
+def delete_car(request, id):
+    car = Car.objects.get(id=id)
+    car.delete()
+    return redirect('cars')
+
+@login_required
+def delete_trip(request, id):
+    trip = Trip.objects.get(id=id)
+    trip.delete()
+    return redirect('trips')
+
+
+@login_required
 def history(request):
     deleted_trips = DeletedTrip.objects.all().order_by('-deleted_at')
     return render(request,'trip/history.html',{"deleted_trips":deleted_trips})
@@ -229,18 +244,23 @@ def add_car(request):
 
 
 # get all cars on the system
+@login_required
 def get_cars(request):
     cars = Car.objects.all()
     cars_count = cars.count()
     context = {"cars":cars,"cars_count":cars_count}
     return render(request,"trip/cars.html",context)
 
-# get user activity history
-# from django.utils import timezone
+# edit a car
+@login_required
+def edit_car(request, id):
+    car = Car.objects.get(id=id)
+    form = CarForm(instance = car) 
 
-# def recent_activity(request):
-#     user = request.User
-#     recent_activity = user.useractivity_set.filter(timestamp__gte=timezone.now()- timezone.timedelta(days=7))
+    if request.method == 'POST':
+        form = CarForm(request.POST,instance=car)
+        if form.is_valid():  
+            form.save()  
+            return redirect("cars")
 
-#     return render( request,"trip/recent_activity.html",{"recent_activity":recent_activity})
-
+    return render(request, 'trip/edit_car.html', {'form': form})

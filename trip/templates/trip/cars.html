@@ -1,6 +1,13 @@
 {% extends "trip/base.html" %}
 {% block content %}
   <div class="container">
+    <div>
+      {% if cars%}
+      <h3>All cars on the system.</h3>
+      {%else%}
+      <a href="{% url 'add_car'%}" class="btn btn-success">+</a>
+      {%endif%}
+    </div>
     <table class="table">
       <thead>
         <tr>
@@ -10,6 +17,8 @@
           <th scope="col">Make</th>
           <th scope="col">Owner</th>
           <th scope="col">Add </th>
+          <th scope="col">Remove </th>
+          <th scope="col">Edit</th>
         
         </tr>
       </thead>
@@ -23,7 +32,9 @@
           <td>{{car.year}}</td>
           <td>{{car.make}}</td>
           <td>{{car.driver}}</td>
-          <td><a href="{% url 'add_car'%}" class="btn btn-success">Add </a></td>
+          <td><a href="{% url 'add_car'%}" class="btn btn-success">+</a></td>
+          <td><a href="{% url 'delete_car' car.id %}" class="btn btn-danger">x </a></td>
+          <td><a href="{% url 'edit_car' car.id %}" class="btn btn-secondary">📝 </a></td>
         </tr>
       {% endfor %}
       </tbody>
