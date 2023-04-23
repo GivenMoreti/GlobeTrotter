@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404,render, redirect
-from .models import Trip, Cart,Car
+from .models import Trip, Cart,Car,UserProfile
 from .forms import TripRequestForm,TripForm,CarForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login ,logout
@@ -9,6 +9,20 @@ from django.contrib.admin.models import LogEntry, ADDITION
 from django.contrib.contenttypes.models import ContentType
 
 
+# test the home view
+@login_required
+def user(request):
+    is_driver = UserProfile.objects.filter(is_driver=True).exists()
+    username = request.user.username
+    context = {'username': username}
+    # if is_driver == True:
+    if is_driver:    
+        return render(request,'trip/driver.html',context )
+    else:
+        return render(request,'trip/home.html',context )
+
+
+# the first red page.
 # independent home view with html
 def greet(request):
 
@@ -80,11 +94,13 @@ def edit_trip(request, id):
 @login_required
 # homepage
 def get_users(request):
+    username = request.user.username
+    
     all_users = User.objects.all()
     # for user in all_users:
     #     print(user.username)
     users_count = all_users.count()
-    context = {"all_users":all_users,}
+    context = {"all_users":all_users,'username': username}
     return render (request,'trip/home.html',context)
 
 # get all items in a cart
@@ -100,7 +116,7 @@ def get_trips(request):
     completed_trips = Trip.objects.filter(status='Completed')
     for completed_trip in completed_trips:
         print("completed trips",completed_trip.id)
-        print(f"driver: {completed_trip.driver}, date : {completed_trip.trip_date}")
+        print(f"driver: {completed_trip.user}, date : {completed_trip.trip_date}")
     
     count_completed_trips = completed_trips.count() 
 
@@ -122,6 +138,10 @@ def get_trips(request):
         print("Active trips:",active_trip.id)
     count_active_trips = active_trips.count()
 
+    is_driver = UserProfile.objects.filter(is_driver=True).exists()
+    username = request.user.username
+    
+
 
     context = {
         "count_active_trips":count_active_trips, 
@@ -129,9 +149,14 @@ def get_trips(request):
                "trips":trips,
                "count_completed_trips":count_completed_trips,
                "users_count":users_count,
-               "cars":cars,"cars_count":cars_count
+               "cars":cars,"cars_count":cars_count,
+               'username': username
                }
     
+
+
+
+
     return render(request,"trip/home.html",context)
 
 
@@ -148,6 +173,10 @@ def login_view(request):
             return render(request, 'trip/login.html', {'error_message': 'Invalid login'})
     else:
         return render(request, 'trip/login.html')
+
+
+
+
 
 @login_required
 def logout_view(request):

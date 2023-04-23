@@ -3,6 +3,9 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    # test the home view
+    path('user/',views.user,name='user'),
+
     path('',views.greet,name='greet'),
     path('trips/',views.get_trips,name="trips"),
     path('cars/',views.get_cars,name="cars"),

@@ -7,7 +7,7 @@ class CarModel(admin.ModelAdmin):
     list_display = ("make","model","driver","year")
 
 class TripModel(admin.ModelAdmin):
-    list_display = ("start_location","end_location","distance","car","driver","status","seats_avail")
+    list_display = ("start_location","end_location","distance","car","user","status","seats_avail")
 class UserProfileModel(admin.ModelAdmin):
     list_display = ("user","is_driver")
 

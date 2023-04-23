@@ -31,7 +31,8 @@ class Trip(models.Model):
     end_location = models.CharField(max_length=100)
     distance = models.DecimalField(max_digits=5, decimal_places=2)
     car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='trips')
-    driver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='trips')
+    # driver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='trips')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='trips')
     # trip_date = models.DateTimeField(default=None,validators=[MinValueValidator(datetime.now)])
     trip_date = models.DateTimeField(datetime.now)
     # the user will change status to requested
@@ -68,7 +69,10 @@ class DeletedTrip(models.Model):
 class UserProfile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
     is_driver = models.BooleanField(default=False)
-    user_image = models.CharField(max_length=8550)
+    # user_image = models.CharField(max_length=8550)
+    # rating = models.DecimalField(max_digits=3, decimal_places=2)
+
+
     def __str__(self):
         return self.user.username
     
